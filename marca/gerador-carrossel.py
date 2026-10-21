@@ -2,6 +2,7 @@ import asyncio, base64
 from playwright.async_api import async_playwright
 sim = base64.b64encode(open('sim.png','rb').read()).decode()
 simw = base64.b64encode(open('sim_white.png','rb').read()).decode()
+simv = base64.b64encode(open('sim_verde.png','rb').read()).decode()
 G='#A1D141'; K='#111111'
 slides = [
  dict(bg='#FFFFFF', fg=K, kicker='BPO.Lab', title='BPO financeiro<br>x contabilidade', sub='Qual é a diferença para quem quer trabalhar na área?', big=True, tsize=98),
@@ -34,7 +35,7 @@ h1{{font-weight:800;font-size:{tsize}px;line-height:1.08;letter-spacing:-1px}}
 .page{{position:absolute;right:90px;top:92px;font-size:30px;font-weight:600;opacity:.6}}
 .foot{{position:absolute;left:90px;bottom:70px;font-size:30px;font-weight:600;opacity:.7}}
 </style></head><body>
-<img class="logo" src="data:image/png;base64,{simw if s.get('dark') else sim}">
+<img class="logo" src="data:image/png;base64,{simw if s.get('dark') else (simv if s['bg']==G else sim)}">
 <div class="page">{i+1}/{len(slides)}</div>
 <div class="wrap"><div class="kicker"><span>{s['kicker']}</span></div><h1>{s['title']}</h1>{accent}{body}</div>
 <div class="foot">@bpo.lab</div>
