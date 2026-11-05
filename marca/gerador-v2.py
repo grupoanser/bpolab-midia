@@ -109,6 +109,19 @@ POSTS = {
  ],
 }
 
+POSTS['post-22-fechamento-um-dia'] = [
+  dict(t='capa', bg=K, k='Rotina e processo', h='Se o seu fechamento leva mais de [um dia], o problema começa antes dele', size=84),
+  dict(k='O jeito que trava', h='Acumular tudo para o fim do mês.', b='Extratos, comprovantes e pendências chegam juntos, e o fechamento vira correria.'),
+  dict(bg=K, k='O jeito que flui', h='Conciliar todo dia e manter as pendências curtas.', b='No fim do mês, sobra só conferir.'),
+  dict(k='No fechamento', h='Correria x conferência.', b='Quem acumula passa dias atrás de documento. Quem concilia todo dia só confere o que já está pronto.', cls='grande'),
+  dict(k='No cliente', h='Informação atrasada x atualizada.', b='Com a conciliação em dia, o cliente sabe o saldo real desta semana, não só o do mês passado.'),
+  dict(k='Como começar', h='Comece pelo banco mais movimentado.', b='Concilie só ele todo dia por uma semana. Depois, inclua os outros.'),
+  dict(t='lista', bg=G, k='Resumo', h='Para fechar em 1 dia:', itens=['Conciliar todo dia', 'Pendências curtas', 'Começar pelo banco principal']),
+  cta('Mande para alguém', 'Mande para quem fecha o mês em vários dias.'),
+]
+SO = os.environ.get('SO')
+if SO: POSTS = {k: v for k, v in POSTS.items() if k == SO}
+
 async def main():
     async with async_playwright() as p:
         b = await p.chromium.launch()
