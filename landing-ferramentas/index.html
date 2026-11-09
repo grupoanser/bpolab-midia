@@ -1,0 +1,357 @@
+<!doctype html><html lang="pt-BR"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>BPO Lab Ferramentas</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Kit com 3 ferramentas prontas para fechar seu primeiro cliente de BPO financeiro. R$ 19,90, pagamento único, garantia de 7 dias.">
+<style>
+  :root {
+    --bg: #111111;
+    --surface: #1a1a1a;
+    --surface-2: #222222;
+    --line: #2e2e2e;
+    --text: #F6F6F2;
+    --muted: #b3b3ad;
+    --accent: #A1D141;       /* verde BPO Lab */
+    --accent-dark: #8dbb32;
+    --on-accent: #111111;
+    --radius: 16px;
+    --fill-bg: #fff3b0; --fill-fg: #4a3a00; --fill-line: #c9a400;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  section { padding: 56px 0; }
+  h1 { font-size: 32px; line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; }
+  h2 { font-size: 26px; line-height: 1.2; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 18px; }
+  h3 { font-size: 19px; line-height: 1.3; margin-bottom: 6px; }
+  p + p { margin-top: 10px; }
+  .hl { color: var(--accent); }
+  .muted { color: var(--muted); }
+  .small { font-size: 15px; }
+  .center { text-align: center; }
+
+  /* Campos a preencher: remover o destaque quando preencher */
+  .fill {
+    background: var(--fill-bg); color: var(--fill-fg);
+    border: 1px dashed var(--fill-line); border-radius: 4px;
+    padding: 0 5px; font-weight: 600; word-break: break-word;
+  }
+
+  /* Faixa de rascunho: apagar antes de publicar */
+  .draft { background: var(--fill-bg); color: var(--fill-fg); font-size: 14px; padding: 10px 0; }
+
+  /* Topo */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(ellipse 70% 60% at 85% 20%, rgba(161, 209, 65, .22), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 0% 100%, rgba(161, 209, 65, .10), transparent 70%),
+      var(--bg);
+    padding: 40px 0 56px;
+  }
+  .logo { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px; font-weight: 700; font-size: 20px; color: var(--text); }
+  .logo img { width: 40px; height: 40px; display: block; }
+  .tag {
+    display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 4px 12px; margin-bottom: 18px;
+  }
+
+  .btn {
+    display: block; width: 100%;
+    background: var(--accent); color: var(--on-accent);
+    text-align: center; text-decoration: none;
+    font-size: 18px; font-weight: 800;
+    padding: 18px 22px; border-radius: 999px;
+    margin-top: 26px;
+    box-shadow: 0 0 28px rgba(161, 209, 65, .35);
+  }
+  .btn:focus-visible, summary:focus-visible, a.inline:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .btn:hover, .btn:focus { background: var(--accent-dark); }
+  .btn-note { font-size: 15px; color: var(--muted); margin-top: 12px; }
+
+  /* Faixa verde */
+  .strip { background: var(--accent); color: var(--on-accent); font-weight: 800; text-align: center; padding-block: 14px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); font-size: 16px; }
+
+  /* Problema */
+  .split { display: grid; gap: 20px; }
+  .pains { list-style: none; border-left: 3px solid var(--accent); padding-left: 18px; }
+  .pains li { padding: 8px 0; font-weight: 600; }
+  .pains li span { color: var(--accent); margin-right: 8px; font-weight: 800; }
+
+  /* Cards */
+  .cards { display: grid; gap: 14px; margin-top: 22px; }
+  .card {
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px;
+  }
+  .card .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(161, 209, 65, .12); color: var(--accent);
+    border: 1px solid rgba(161, 209, 65, .4);
+    font-weight: 800; margin-bottom: 12px;
+  }
+  .card .type { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+  .card .comes { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 15px; color: var(--muted); }
+
+  /* Passos */
+  .steps { counter-reset: s; list-style: none; margin-top: 8px; }
+  .steps li { counter-increment: s; position: relative; padding: 0 0 22px 52px; }
+  .steps li::before {
+    content: counter(s); position: absolute; left: 0; top: -2px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--accent); color: var(--on-accent);
+    display: flex; align-items: center; justify-content: center; font-weight: 800;
+  }
+
+  /* Preço */
+  .price-box {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+    padding: 26px 22px; max-width: 460px; margin: 0 auto;
+    box-shadow: 0 0 60px rgba(161, 209, 65, .08);
+  }
+  .price-name { font-size: 14px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+  .price-big { font-size: 48px; font-weight: 800; color: var(--accent); line-height: 1.05; margin-top: 8px; }
+  table.price { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 16px; text-align: left; }
+  table.price td { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  table.price td:last-child { text-align: right; white-space: nowrap; padding-left: 12px; }
+  table.price tr.total td { font-weight: 800; border-bottom: 0; color: var(--text); }
+  .info { margin-top: 16px; font-size: 15px; text-align: left; }
+  .info p + p { margin-top: 6px; }
+  .guarantee { margin-top: 18px; text-align: left; border: 1px solid rgba(161, 209, 65, .4); background: rgba(161, 209, 65, .06); padding: 14px 16px; border-radius: 12px; font-size: 15px; }
+  a.inline { color: var(--accent); }
+
+  /* Quem faz */
+  .people { display: grid; gap: 14px; margin-top: 18px; }
+  .person { display: flex; gap: 14px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+  .avatar {
+    flex: 0 0 52px; width: 52px; height: 52px; border-radius: 50%;
+    border: 2px solid var(--accent); color: var(--accent); font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* FAQ */
+  details { border-bottom: 1px solid var(--line); }
+  details:first-of-type { border-top: 1px solid var(--line); }
+  summary { cursor: pointer; padding: 18px 32px 18px 0; font-weight: 700; list-style: none; position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; position: absolute; right: 4px; top: 14px; font-size: 24px; color: var(--accent); }
+  details[open] summary::after { content: "−"; }
+  details .ans { padding: 0 0 18px; color: var(--muted); }
+
+  .final {
+    background: radial-gradient(ellipse 60% 70% at 50% 100%, rgba(161, 209, 65, .18), transparent 70%), var(--bg);
+  }
+
+  footer { padding: 28px 0 40px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); }
+  footer p + p { margin-top: 8px; }
+
+  @media (min-width: 700px) {
+    h1 { font-size: 46px; }
+    h2 { font-size: 32px; }
+    section { padding: 72px 0; }
+    .hero { padding: 48px 0 80px; }
+    .btn { display: inline-block; width: auto; min-width: 340px; }
+    .split { grid-template-columns: 1fr 1fr; align-items: center; gap: 36px; }
+    .cards { grid-template-columns: repeat(3, 1fr); }
+    .people { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+
+
+<!-- 1. TOPO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="logo"><img src="data:image/png;base64,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" alt="">BPO Lab</div><br>
+    <span class="tag">BPO Lab - Ferramentas</span>
+    <h1>Ferramentas prontas para fechar seu <span class="hl">primeiro cliente</span> de BPO financeiro</h1>
+    <p class="muted">Diagnóstico, preço e proposta. Três ferramentas com modelo em branco, exemplo preenchido e guia.</p>
+    <a class="btn" href="https://pay.cakto.com.br/pxhnbp7">Quero o kit por R$ 19,90</a>
+    <p class="btn-note">Pagamento único. Garantia de 7 dias.</p>
+      </div>
+</header>
+
+<div class="strip">Diagnóstico, preço e proposta em um só kit</div>
+
+<main>
+
+<!-- 2. O PROBLEMA -->
+<section>
+  <div class="wrap split">
+    <div>
+      <h2>Onde quem começa <span class="hl">costuma travar</span></h2>
+      <p class="muted">Quem começa em BPO financeiro costuma travar em três pontos. O kit traz uma ferramenta pronta para cada um.</p>
+    </div>
+    <ul class="pains">
+      <li><span>1</span>Entender o cliente.</li>
+      <li><span>2</span>Calcular quanto cobrar.</li>
+      <li><span>3</span>Apresentar a proposta.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. O QUE VOCÊ RECEBE -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2 class="center">O que você <span class="hl">recebe</span></h2>
+    <p class="muted center">Kit para fechar seu primeiro cliente: 3 ferramentas, 7 arquivos para baixar.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="num">1</div>
+        <h3>Diagnóstico do cliente</h3>
+        <p class="type">Planilha de Excel</p>
+        <p>Para entender o cliente antes de montar a proposta.</p>
+        <p class="comes">Vem com: modelo em branco, exemplo preenchido e guia na aba "Guia" da planilha.</p>
+      </div>
+      <div class="card">
+        <div class="num">2</div>
+        <h3>Calculadora de preço</h3>
+        <p class="type">Planilha de Excel</p>
+        <p>Para calcular quanto cobrar pelo serviço.</p>
+        <p class="comes">Vem com: modelo em branco, exemplo preenchido e guia na aba "Guia" da planilha.</p>
+      </div>
+      <div class="card">
+        <div class="num">3</div>
+        <h3>Proposta comercial</h3>
+        <p class="type">Apresentação em PowerPoint + guia em PDF</p>
+        <p>Para apresentar sua proposta ao cliente.</p>
+        <p class="comes">Vem com: modelo em branco, exemplo preenchido e guia em PDF.</p>
+      </div>
+    </div>
+    <p class="small muted center" style="margin-top:20px">Pretendemos adicionar novas ferramentas. A intenção é liberá-las sem custo para quem já comprou.</p>
+    <div class="center"><a class="btn" href="https://pay.cakto.com.br/pxhnbp7">Quero as 3 ferramentas</a></div>
+  </div>
+</section>
+
+<!-- 4. COMO FUNCIONA -->
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <h2>Como funciona <span class="hl">depois de comprar</span></h2>
+    <ol class="steps">
+      <li><strong>Pague</strong> com Pix ou cartão de crédito.</li>
+      <li><strong>Receba um e-mail</strong> com o acesso à área de membros do BPO Lab, na plataforma Astron Members.</li>
+      <li><strong>Acesse e baixe.</strong> As 3 ferramentas ficam como aulas, com os arquivos para baixar.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 5. PREÇO E GARANTIA -->
+<section id="preco">
+  <div class="wrap center">
+    <h2>Preço e <span class="hl">garantia</span></h2>
+    <div class="price-box">
+      <p class="price-name">BPO Lab - Ferramentas</p>
+      <p class="price-big">R$ 19,90</p>
+      <p class="muted small">Pagamento único</p>
+      <table class="price">
+        <tr><td>Kit para fechar seu primeiro cliente</td><td>R$ 19,90</td></tr>
+        <tr><td>Taxa de serviço cobrada no checkout</td><td>R$ 0,99</td></tr>
+        <tr class="total"><td>Total a pagar</td><td>R$ 20,89</td></tr>
+      </table>
+      <div class="info">
+        <p><strong>Pagamento:</strong> Pix ou cartão de crédito.</p>
+      </div>
+      <div class="guarantee">
+        <p><strong class="hl">Garantia de 7 dias corridos.</strong></p>
+        <p>Se não gostar, peça o reembolso integral em até 7 dias pela Cakto, em <a class="inline" href="https://reembolso.cakto.com.br" target="_blank" rel="noopener">reembolso.cakto.com.br</a>.</p>
+      </div>
+      <a class="btn" href="https://pay.cakto.com.br/pxhnbp7" style="width:100%">Comprar o kit</a>
+    </div>
+  </div>
+</section>
+
+<!-- 6. QUEM FAZ -->
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <h2>Quem <span class="hl">faz</span></h2>
+    <p class="muted">O BPO Lab é um projeto educacional de dois donos de BPO financeiro.</p>
+    <div class="people">
+      <div class="person">
+        <div class="avatar" aria-hidden="true">FM</div>
+        <div>
+          <h3>Felipe Maués</h3>
+          <p class="muted">Dono de BPO financeiro. Sócio do Grupo Anser, em Belém/PA.</p>
+        </div>
+      </div>
+      <div class="person">
+        <div class="avatar" aria-hidden="true">PD</div>
+        <div>
+          <h3>Pedro Dias</h3>
+          <p class="muted">Dono de um BPO financeiro em Florianópolis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. PERGUNTAS FREQUENTES -->
+<section>
+  <div class="wrap">
+    <h2>Perguntas <span class="hl">frequentes</span></h2>
+
+    <details>
+      <summary>Serve para quem nunca teve cliente?</summary>
+      <div class="ans">Sim. O kit foi feito para quem trabalha ou quer trabalhar com BPO financeiro e ainda precisa fechar o primeiro cliente.</div>
+    </details>
+
+    <details>
+      <summary>Preciso saber Excel?</summary>
+      <div class="ans">Não precisa saber fórmulas. As duas planilhas são de Excel e já vêm com as fórmulas prontas. Você só preenche os campos, alguns com listas para escolher. Cada planilha tem uma aba "Guia" e um exemplo preenchido.</div>
+    </details>
+
+    <details>
+      <summary>Como recebo?</summary>
+      <div class="ans">Depois do pagamento, você recebe um e-mail com o acesso à área de membros do BPO Lab, na Astron Members. Lá estão as 3 ferramentas, com os arquivos para baixar.</div>
+    </details>
+
+    <details>
+      <summary>E se eu não gostar?</summary>
+      <div class="ans">Você tem 7 dias corridos de garantia. Peça o reembolso integral pela Cakto, em reembolso.cakto.com.br.</div>
+    </details>
+
+    <details>
+      <summary>Tem contrato pronto?</summary>
+      <div class="ans">Não. O kit não traz modelo de contrato.</div>
+    </details>
+
+    <details>
+      <summary>Terei ferramentas novas?</summary>
+      <div class="ans">Pretendemos adicionar novas ferramentas. A intenção é liberá-las sem custo para quem já comprou.</div>
+    </details>
+  </div>
+</section>
+
+<!-- 8. BOTÃO FINAL -->
+<section class="final">
+  <div class="wrap center">
+    <h2>Kit para fechar seu <span class="hl">primeiro cliente</span></h2>
+    <p>R$ 19,90 + R$ 0,99 de taxa de serviço. Total de R$ 20,89.</p>
+    <p class="muted">Pagamento único. Garantia de 7 dias.</p>
+    <a class="btn" href="https://pay.cakto.com.br/pxhnbp7">Quero o kit por R$ 19,90</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>BPO Lab - Ferramentas</p>
+    <p>O kit oferece ferramentas prontas. Não garante resultado financeiro nem fechamento de clientes.</p>
+  </div>
+</footer>
+
+
+
+</body></html>
