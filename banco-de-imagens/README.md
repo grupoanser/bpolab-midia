@@ -3,7 +3,7 @@
 Fotos geradas por IA, estilo editorial, paleta preto, verde e off-white. **Todas são imagens de IA: não apresentar as pessoas como profissionais reais ou clientes.** Formato vertical 4:5 (1122x1402).
 
 ## Como organizar
-- Uma pasta por tipo de cena. Nome do arquivo: `foto-NN-descricao-curta.png`, numeração contínua (próxima: 16).
+- Uma pasta por tipo de cena. Nome do arquivo: `foto-NN-descricao-curta.png`, numeração contínua (próxima: 17).
 - Ao adicionar foto nova, registrar uma linha na tabela abaixo.
 
 ## Catálogo
@@ -42,6 +42,7 @@ Fotos geradas por IA, estilo editorial, paleta preto, verde e off-white. **Todas
 | `foto-02-maos-relatorios-pasta-verde.png` | Mãos com relatórios e pasta verde | Detalhe da mão que escreve parece ampliado; usar com corte |
 | `foto-08-analista-grafico-impresso.png` | Mulher analisando gráficos impressos | Gráficos sem texto legível |
 | `foto-12-homem-organizando-papeis.png` | Homem organizando papéis na mesa, notebook e pasta verde | |
+| `foto-16-mesa-notebook-proposta-calculadora.png` | Mesa escura vista de cima: notebook com planilha, proposta impressa, caneta verde, calculadora, café | Sem pessoas. Lado esquerdo vazio para título. Usada na capa do curso Ferramentas (Astron) |
 
 ## Cuidados
 - Conferir mãos, dedos e rostos antes de usar (imagens de IA podem ter detalhes estranhos).
