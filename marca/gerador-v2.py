@@ -9,7 +9,12 @@ def b64(p): return base64.b64encode(open(os.path.join(ROOT, p), 'rb').read()).de
 SIM_K = b64('marca/simbolo-escuro.png'); SIM_W = b64('marca/simbolo-branco.png')
 G = '#A1D141'; K = '#111111'; O = '#F6F6F2'; W = '#FFFFFF'
 
-def hl(t): return t.replace('BPO Lab', 'BPO&nbsp;Lab').replace('[', '<span class="hl">').replace(']', '</span>')
+def nb(t):
+    # evita palavra sozinha na última linha: une as duas últimas palavras
+    if not t or '<' in t or ' ' not in t.strip(): return t
+    a, b = t.rstrip().rsplit(' ', 1); return a + '&nbsp;' + b
+
+def hl(t): t = nb(t); return t.replace('BPO Lab', 'BPO&nbsp;Lab').replace('[', '<span class="hl">').replace(']', '</span>')
 
 def slide(s, i, n):
     bg = s.get('bg', O); dark = bg == K or s.get('foto')
@@ -22,18 +27,18 @@ def slide(s, i, n):
         foto = f'<div class="foto" style="background-image:url(data:image/png;base64,{b64(s["foto"])})"></div><div class="shade"></div>'
     inner = ''
     if t == 'capa':
-        inner = f'<div class="kick">{s["k"]}</div><h1 class="cap">{hl(s["h"])}</h1>' + (f'<p class="sub">{s["sub"]}</p>' if s.get('sub') else '')
+        inner = f'<div class="kick">{s["k"]}</div><h1 class="cap">{hl(s["h"])}</h1>' + (f'<p class="sub">{nb(s["sub"])}</p>' if s.get('sub') else '')
         pos = 'end' if s.get('foto') else 'center'
     elif t == 'num':
-        inner = f'<div class="num">{s["n"]}</div><div class="kick">{s["k"]}</div><h2>{hl(s["h"])}</h2>' + (f'<p class="body">{s["b"]}</p>' if s.get('b') else '')
+        inner = f'<div class="num">{s["n"]}</div><div class="kick">{s["k"]}</div><h2>{hl(s["h"])}</h2>' + (f'<p class="body">{nb(s["b"])}</p>' if s.get('b') else '')
         pos = 'center'
     elif t == 'lista':
         items = ''.join(f'<li><span class="box">{j+1}</span>{x}</li>' for j, x in enumerate(s['itens']))
         inner = f'<div class="kick">{s["k"]}</div><h2>{hl(s["h"])}</h2><ol class="lst">{items}</ol>'
         pos = 'center'
     else:
-        inner = f'<div class="kick">{s["k"]}</div><h2 class="{s.get("cls","")}">{hl(s["h"])}</h2>' + (f'<p class="body">{s["b"]}</p>' if s.get('b') else '')
-        pos = 'center'
+        inner = f'<div class="kick">{s["k"]}</div><h2 class="{s.get("cls","")}">{hl(s["h"])}</h2>' + (f'<p class="body">{nb(s["b"])}</p>' if s.get('b') else '')
+        pos = 'end' if s.get('foto') else 'center'
     dots = ''.join(f'<i class="{"on" if j == i else ""}"></i>' for j in range(n))
     arr = '' if i == n - 1 else 'ARRASTA &rarr;'
     hlbg = G; hlfg = K
@@ -46,10 +51,10 @@ body{{width:1080px;height:1350px;background:{bg};color:{fg};font-family:Poppins,
 .logo{{position:absolute;left:84px;top:72px;width:80px;z-index:2}}
 .wrap{{position:absolute;left:84px;right:84px;top:200px;bottom:200px;display:flex;flex-direction:column;justify-content:{pos};z-index:2}}
 .kick{{font-weight:700;font-size:28px;letter-spacing:6px;color:{kc};margin-bottom:26px;text-transform:uppercase}}
-h1.cap{{font-weight:700;font-size:{s.get('size',104)}px;line-height:1.1;letter-spacing:-1.5px}}
+h1.cap{{font-weight:700;font-size:{s.get('size',104)}px;line-height:1.16;letter-spacing:-1.5px}}
 h2{{font-weight:700;font-size:{s.get('size',72)}px;line-height:1.13;letter-spacing:-1px}}
 h2.grande{{font-size:84px}}
-.hl{{background:{hlbg};color:{hlfg};padding:0 14px;box-decoration-break:clone;-webkit-box-decoration-break:clone}}
+.hl{{background:linear-gradient(transparent 14%,{hlbg} 14%);color:{hlfg};padding:0 14px;box-decoration-break:clone;-webkit-box-decoration-break:clone}}
 .sub{{font-size:40px;line-height:1.4;margin-top:40px;font-weight:400}}
 .body{{font-size:40px;line-height:1.45;margin-top:40px;font-weight:400}}
 .num{{font-weight:800;font-size:220px;line-height:.9;color:{G};letter-spacing:-6px;margin-bottom:30px}}
@@ -68,57 +73,128 @@ h2.grande{{font-size:84px}}
 def cta(k, h, extra='@bpo.lab'):
     return dict(bg=K, k=k, h=h, b=f'<span class="at">{extra}</span>')
 
+BI = 'banco-de-imagens/'
 POSTS = {
- 'post-17-termos-dfc': [
-  dict(t='capa', bg=O, k='Glossário', h='5 termos de [DFC] que todo analista precisa dominar', sub='DFC é a Demonstração do Fluxo de Caixa. Salve para consultar.', size=96),
-  dict(t='num', n='01', k='Fluxo operacional', h='O dinheiro da atividade do dia a dia.', b='Vendas e serviços recebidos, fornecedores, salários e impostos pagos. Mostra se a operação se paga.'),
-  dict(t='num', n='02', k='Fluxo de investimento', h='O dinheiro que vai para ativos.', b='Compra e venda de máquinas, veículos, equipamentos e participações em outras empresas.'),
-  dict(t='num', n='03', k='Fluxo de financiamento', h='O dinheiro que vem de sócios e de bancos.', b='Empréstimos tomados e pagos, aportes e retiradas dos sócios.'),
-  dict(t='num', n='04', k='Saldo inicial e final', h='Quanto tinha no começo e quanto sobrou no fim.', b='Saldo inicial + entradas &minus; saídas = saldo final. E o saldo final tem que bater com o extrato.'),
-  dict(t='num', n='05', k='Regime de caixa', h='Vale a data em que o dinheiro entrou ou saiu.', b='Venda de março recebida em abril entra na DFC de abril. Na DRE, que segue a competência, ela fica em março.'),
-  dict(t='lista', bg=G, k='Resumo', h='Os 5 termos da DFC:', itens=['Operacional', 'Investimento', 'Financiamento', 'Saldo inicial e final', 'Regime de caixa']),
-  cta('Salve', 'Salve para consultar na próxima DFC que você montar.'),
+ # 12/11 (qui)
+ 'post-23-semana-analista': [
+  dict(t='capa', bg=W, k='Rotina e processo', h='Se a sua segunda começa apagando [incêndio], mude o que você faz na sexta', sub='Um modelo de semana para adaptar à sua rotina.', size=84),
+  dict(foto=BI+'documentos-e-relatorios/foto-12-homem-organizando-papeis.png', k='A ideia', h='Cada dia da semana com uma tarefa principal.', b='O resto encaixa em volta dela.'),
+  dict(k='Segunda', h='Vencimentos da semana.', b='Veja o que vence até sexta e o que ainda depende de aprovação do cliente.', cls='grande'),
+  dict(bg=K, k='Todo dia', h='Conciliação do banco.', b='Uns minutos por dia evitam a pilha do fim do mês.', cls='grande'),
+  dict(k='Terça e quarta', h='Lançamentos e classificação.', b='Com o banco em dia, a semana não acumula.', cls='grande'),
+  dict(k='Quinta', h='Pendências com os clientes.', b='Documento que falta, lançamento sem explicação, dúvida para tirar. Tudo junto, em uma mensagem só.', cls='grande'),
+  dict(bg=K, k='Sexta', h='Relatórios e comunicação.', b='Quem fecha a semana com o cliente informado começa a segunda sem surpresa.', cls='grande'),
+  dict(bg=G, k='Importante', h='Isto é um modelo, não uma regra.', b='Ajuste ao número de clientes e aos prazos de cada um.'),
+  cta('Comente', 'Como é a sua semana hoje?'),
  ],
- 'post-18-primeiro-cliente': [
-  dict(t='capa', foto='banco-de-imagens/pessoas-trabalhando/foto-14-analista-telefone.png', k='Começar no BPO', h='Por que você ainda não fechou seu [primeiro cliente]?', sub='A resposta incomoda.', size=92),
-  dict(k='O que não falta', h='Aula você já assistiu.', b='O que falta é o que vem depois dela.', cls='grande'),
-  dict(k='A verdade', h='Ninguém fica 100% preparado antes do primeiro cliente.', b='A segurança vem com o trabalho, não antes dele.'),
-  dict(k='O disfarce', h='Medo do primeiro passo parece cuidado.', b='Na prática, é adiar.'),
-  dict(t='num', n='10', k='O primeiro passo', h='Liste 10 pessoas que têm empresa.', b='Mande mensagem para uma delas hoje. Só uma.'),
-  dict(bg=G, k='O que ele precisa', h='Seu primeiro cliente precisa de uma conversa e de uma proposta escrita.', b='Não de um serviço perfeito.'),
-  cta('Mande para alguém', 'Mande este post para quem está adiando.'),
+ # 13/11 (sex)
+ 'post-24-mito-ia': [
+  dict(t='capa', bg=G, k='Mito', h='Usar IA é [trapacear] no trabalho?', sub='A opinião do BPO&nbsp;Lab.', size=104),
+  dict(k='O que a IA entrega', h='Um rascunho. A resposta final é sua.', b='Ela sugere uma classificação, resume um extrato, escreve a primeira versão de um <span style="white-space:nowrap">e-mail</span>. Quem decide é você.'),
+  dict(bg=K, k='Continua com você', h='Julgamento, conferência e a relação com o cliente.', b='Nenhuma ferramenta conhece o cliente como quem o atende toda semana.'),
+  dict(t='num', n='01', k='Regra', h='Revise tudo o que a IA produzir.', b='Se você não consegue explicar o resultado, ele não vai para o cliente.'),
+  dict(t='num', n='02', k='Regra', h='Dado real de cliente só com autorização.', b='Na dúvida, troque nomes e valores por dados fictícios antes de colar.'),
+  dict(bg=G, k='O ganho', h='O tempo que sobra vai para a análise.', b='É ali que o cliente enxerga valor.'),
+  cta('Comente', 'Você usa IA no trabalho? Para quê?'),
  ],
- 'post-19-pauta-encontro': [
-  dict(t='capa', bg=K, k='Encontro · terça 10/11', h='O que você quer [discutir] na terça?', sub='1º encontro do BPO Lab, às 19h, no Google Meet.', size=100),
-  dict(t='lista', bg=O, k='Vote na pauta', h='Escolha um número:', itens=['Conseguir cliente', 'Nicho ou generalista', 'Relatórios e análise', 'IA na rotina']),
-  dict(bg=G, k='Outra pauta?', h='Tem outro assunto travando a sua rotina?', b='Escreva nos comentários. Sem dados de cliente.'),
-  cta('Comente', 'Comente o número da sua pauta.', 'Para receber o link da chamada, entre no grupo pelo link da bio.'),
+ # 14/11 (sáb)
+ 'post-25-checklist-primeiro-cliente': [
+  dict(t='capa', bg=K, k='Começar no BPO', h='Checklist: antes de fechar seu [primeiro cliente]', sub='Salve para usar na próxima conversa.', size=96),
+  dict(foto=BI+'mentoria-e-treinamento/foto-13-dupla-revisando-documento.png', k='Antes de começar', h='Combine por escrito o que vai ser feito.', b='O que não foi combinado vira cobrança depois.'),
+  dict(t='num', n='01', k='Escopo', h='Escopo escrito.', b='Quais tarefas entram e quais ficam de fora.'),
+  dict(t='num', n='02', k='Contas', h='Contas e bancos.', b='Quais contas, cartões e bancos você vai acompanhar.'),
+  dict(t='num', n='03', k='Pagamentos', h='Quem aprova os pagamentos.', b='O BPO organiza. Quem aprova é o cliente.'),
+  dict(t='num', n='04', k='Prazos', h='Prazo dos documentos.', b='Até que dia o cliente manda notas, boletos e comprovantes.'),
+  dict(t='num', n='05', k='Comunicação', h='Canal de conversa.', b='Onde vocês falam e em que horário.'),
+  dict(t='num', n='06', k='Contrato', h='Contrato revisado.', b='Peça para um advogado revisar antes de assinar.'),
+  dict(t='lista', bg=G, k='Resumo', h='Antes do primeiro cliente:', itens=['Escopo', 'Contas e bancos', 'Aprovação', 'Prazos', 'Canal', 'Contrato']),
+  cta('Salve', 'Salve para usar antes do primeiro cliente.'),
  ],
- 'post-20-encontro-amanha': [
-  dict(t='capa', bg=W, k='Amanhã · 19h', h='Amanhã tem [encontro] do BPO Lab', sub='O 1º encontro da comunidade. Terça, 10/11, às 19h, no Google Meet.', size=100),
-  dict(k='Quando', h='Terça, 10/11, das 19h às 21h.', cls='grande'),
-  dict(bg=K, k='Onde', h='No Google Meet.', b='O link da chamada é enviado no grupo.', cls='grande'),
-  dict(bg=G, k='O que levar', h='Uma dúvida ou um caso da sua rotina.', b='Sem dados de cliente.'),
-  cta('Como entrar', 'Ainda não está no grupo? Entre pelo link da bio.'),
+ # 15/11 (dom)
+ 'post-26-dre-dfc': [
+  dict(t='capa', bg=W, k='Análise de resultado', h='Quando o cliente perguntar "cadê o lucro?", a resposta não está na [DRE]', size=84),
+  dict(k='DRE', h='A empresa teve lucro no período?', b='Mostra receitas, custos e despesas pela competência: quando a venda ou a despesa aconteceu.'),
+  dict(bg=K, k='DFC', h='Para onde foi o dinheiro?', b='Mostra entradas e saídas pelo caixa: quando o dinheiro entrou ou saiu da conta.'),
+  dict(k='Exemplo hipotético', h='Uma venda grande a prazo.', b='Na DRE, ela entra no mês da venda e o lucro aparece. No caixa, o dinheiro só chega quando o cliente pagar.'),
+  dict(k='Por isso', h='Dá para ter lucro e faltar dinheiro.', b='Estoque comprado, parcelas a receber e empréstimo pago tiram caixa sem pesar no lucro do mesmo jeito.'),
+  dict(bg=G, k='Resumo', h='A DRE diz se deu lucro. A DFC diz onde está o dinheiro.', b='Leia os dois juntos.'),
+  cta('Comente', 'Qual dos dois você mais usa com seus clientes?'),
  ],
- 'post-21-encontro-hoje': [
-  dict(t='capa', bg=G, k='Hoje · 19h', h='É hoje: [encontro] do BPO Lab', sub='Das 19h às 21h, no Google Meet.', size=110),
-  dict(k='Como entrar', h='O link da chamada está no grupo.', b='Ainda não está? Entre pelo link da bio.'),
-  dict(bg=K, k='O que levar', h='Uma dúvida.', b='Pode ser algo que travou ou algo que deu certo na sua rotina.', cls='grande'),
-  cta('Até mais tarde', 'Te vejo às 19h.'),
+ # 16/11 (seg)
+ 'post-27-horas-por-cliente': [
+  dict(t='capa', foto=BI+'pessoas-trabalhando/foto-15-analista-dois-monitores.png', k='Gestão de clientes', h='Se dois clientes pagam igual e um dá o [dobro de trabalho], revise isto', size=84),
+  dict(k='A situação', h='Mesmo valor, esforço diferente.', b='Um manda tudo organizado. O outro manda comprovante por foto, fora do prazo, e pede ajuste toda semana.'),
+  dict(t='num', n='01', k='Passo 1', h='Anote as horas de cada cliente por 30 dias.', b='Planilha simples: data, cliente, tarefa e tempo gasto.'),
+  dict(t='num', n='02', k='Passo 2', h='Compare as horas com o que cada um paga.', b='Exemplo hipotético: A e B pagam o mesmo, mas B consome muito mais horas.'),
+  dict(t='num', n='03', k='Passo 3', h='Ajuste o escopo ou o preço.', b='Com o registro em mãos, a conversa com o cliente sai do achismo.'),
+  dict(bg=G, k='Antes de reajustar', h='Às vezes o problema é processo, e não preço.', b='Um prazo de envio combinado pode resolver sem mexer no valor.'),
+  cta('Comente', 'Você mede as horas de cada cliente?'),
+ ],
+ # 17/11 (ter)
+ 'post-28-primeira-conversa': [
+  dict(t='capa', foto=BI+'reuniao-com-cliente/foto-10-consultor-restaurante.png', k='Começar no BPO', h='Na primeira conversa com um cliente, esta [pergunta] revela mais que todas', size=84),
+  dict(t='lista', bg=O, k='Para entender o cenário', h='Comece por estas:', itens=['Como controla hoje?', 'Quem paga e quem aprova?', 'Onde fica o registro?']),
+  dict(bg=K, k='A pergunta', h='"O que mais atrapalha o seu financeiro hoje?"', b='A resposta mostra a dor real. E é ela que vai guiar o escopo.'),
+  dict(k='Escute', h='Deixe o cliente falar sem interromper.', b='Anote as palavras dele. Elas vão para a proposta.'),
+  dict(bg=G, k='Cuidado', h='Não prometa resultado na primeira conversa.', b='Proponha um escopo claro do que você vai fazer.'),
+  cta('Comente', 'Que pergunta você acrescentaria?'),
+ ],
+ # 18/11 (qua)
+ 'post-29-nicho-generalista': [
+  dict(t='capa', bg=W, k='Nicho ou generalista', h='Atendia qualquer tipo de empresa, aceitava todo cliente e não conseguia [padronizar] nada', sub='Uma situação comum no começo.', size=80),
+  dict(k='Nicho', h='Você aprende o vocabulário e as rotinas de um setor.', b='Os processos se repetem, e fica mais fácil padronizar.'),
+  dict(k='Generalista', h='Cada cliente traz uma rotina diferente.', b='Você aprende muito, mas leva mais tempo para criar um padrão.'),
+  dict(bg=K, k='Risco do nicho', h='Depender de um setor só.', b='Se o setor passa por um ano ruim, a sua carteira sente junto.'),
+  dict(bg=K, k='Risco do generalista', h='Saber um pouco de tudo.', b='E não ser lembrado como referência em nada.'),
+  dict(k='Como testar', h='Olhe para os clientes que você já tem.', b='Se mais de um é do mesmo setor, comece por ele. Sem fechar a porta para os outros.'),
+  dict(bg=G, k='Sem certo ou errado', h='A escolha depende do seu momento.', cls='grande'),
+  cta('Comente', 'Nicho ou generalista: qual você escolheu?'),
+ ],
+ # 19/11 (qui)
+ 'post-30-conferir-relatorio': [
+  dict(t='capa', bg=G, k='Rotina e processo', h='Antes de clicar em "enviar" no relatório, confira estas [4 coisas]', size=90),
+  dict(t='num', n='01', k='Saldos', h='Os saldos batem com o extrato?', b='Conta por conta, no último dia do período.'),
+  dict(t='num', n='02', k='Classificação', h='Os lançamentos estão na categoria certa?', b='Olhe primeiro os valores maiores e o que caiu em "outros".'),
+  dict(t='num', n='03', k='Comparativo', h='O que mudou em relação ao mês anterior?', b='Coloque os dois meses lado a lado.'),
+  dict(t='num', n='04', k='Variações', h='Cada variação grande tem explicação?', b='Se você não sabe explicar, o cliente vai perguntar.'),
+  dict(foto=BI+'documentos-e-relatorios/foto-08-analista-grafico-impresso.png', k='Se der', h='Peça um segundo olhar.', b='Outra pessoa acha em minutos o que você já não enxerga.'),
+  dict(t='lista', bg=K, k='Resumo', h='Antes de enviar:', itens=['Saldos', 'Classificação', 'Comparativo', 'Variações']),
+  cta('Salve', 'Salve para conferir no próximo fechamento.'),
+ ],
+ # 20/11 (sex)
+ 'post-31-pov-primeira-semana': [
+  dict(t='capa', bg=K, k='POV', h='Sua [primeira semana] no financeiro de uma empresa', sub='Cena hipotética: pastas misturadas, notas soltas e ninguém sabe o saldo certo.', size=96),
+  dict(k='Dia 1', h='Mapear contas, bancos e cartões.', b='Antes de lançar qualquer coisa, saiba por onde o dinheiro passa.', cls='grande'),
+  dict(k='Dia 2', h='Levantar as pendências.', b='Contas em atraso, notas sem lançamento, comprovantes perdidos. Faça uma lista.', cls='grande'),
+  dict(k='Dia 3', h='Definir a rotina.', b='O que vai ser feito todo dia, toda semana e no fim do mês.', cls='grande'),
+  dict(bg=K, k='Dias 4 e 5', h='Entregar um primeiro relatório simples.', b='Saldo, o que vence e as pendências. Melhor simples e certo do que completo e atrasado.'),
+  dict(bg=G, k='Na primeira semana', h='O objetivo é entender.', b='Arrumar vem depois.', cls='grande'),
+  cta('Comente', 'Como foi a sua primeira semana em um financeiro?'),
+ ],
+ # 21/11 (sáb)
+ 'post-32-glossario-gerencial': [
+  dict(t='capa', bg=W, k='Glossário 2', h='6 termos de [relatório gerencial] para ter na ponta da língua', sub='Salve para consultar.', size=92),
+  dict(t='num', n='01', k='EBITDA', h='Lucro antes de juros, impostos, depreciação e amortização.', b='Mostra quanto a operação gera, sem o efeito de dívidas, tributos sobre o lucro e desgaste dos ativos.', size=64),
+  dict(t='num', n='02', k='Margem de contribuição', h='Receita menos custos e despesas variáveis.', b='É o que sobra de cada venda para pagar os custos fixos e gerar lucro.'),
+  dict(t='num', n='03', k='Ponto de equilíbrio', h='O faturamento em que não há lucro nem prejuízo.', b='Abaixo dele, a empresa perde dinheiro. Acima, começa a lucrar.'),
+  dict(t='num', n='04', k='Capital de giro', h='O dinheiro para manter a operação rodando.', b='Cobre o intervalo entre pagar fornecedores e receber dos clientes.'),
+  dict(t='num', n='05', k='CMV', h='Custo das mercadorias vendidas.', b='O custo do que saiu na venda, e não de tudo o que foi comprado no mês.'),
+  dict(t='num', n='06', k='Ticket médio', h='Faturamento dividido pelo número de vendas.', b='Mostra quanto, em média, cada venda traz.'),
+  dict(t='lista', bg=G, k='Resumo', h='Os 6 termos:', itens=['EBITDA', 'Margem de contribuição', 'Ponto de equilíbrio', 'Capital de giro', 'CMV', 'Ticket médio']),
+  cta('Salve', 'Salve para consultar no próximo relatório.'),
+ ],
+ # 22/11 (dom)
+ 'post-33-ferramentas': [
+  dict(t='capa', bg=G, k='Comunidade', h='Qual [ferramenta] você usa no BPO?', sub='Vamos comparar nos comentários.', size=104),
+  dict(k='Sistema financeiro', h='Onde ficam contas a pagar, a receber e o fluxo de caixa?'),
+  dict(k='Planilha', h='Ainda faz parte da sua rotina?', b='Para controles paralelos, conferências ou relatórios.'),
+  dict(bg=K, k='Conciliação', h='Como você bate o banco com os lançamentos?', b='Pelo próprio sistema, por planilha ou à mão.'),
+  dict(k='IA', h='Entra em alguma parte do seu dia?', b='Classificação, resumo de extrato, rascunho de <span style="white-space:nowrap">e-mail</span>.'),
+  dict(t='lista', bg=K, k='Na hora de escolher', h='Olhe para:', itens=['Integração com bancos', 'Custo por cliente', 'Tempo para aprender']),
+  cta('Comente', 'Conte qual ferramenta você usa e por quê.'),
  ],
 }
 
-POSTS['post-22-fechamento-um-dia'] = [
-  dict(t='capa', bg=K, k='Rotina e processo', h='Se o seu fechamento leva mais de [um dia], o problema começa antes dele', size=84),
-  dict(k='O jeito que trava', h='Acumular tudo para o fim do mês.', b='Extratos, comprovantes e pendências chegam juntos, e o fechamento vira correria.'),
-  dict(bg=K, k='O jeito que flui', h='Conciliar todo dia e manter as pendências curtas.', b='No fim do mês, sobra só conferir.'),
-  dict(k='No fechamento', h='Correria x conferência.', b='Quem acumula passa dias atrás de documento. Quem concilia todo dia só confere o que já está pronto.', cls='grande'),
-  dict(k='No cliente', h='Informação atrasada x atualizada.', b='Com a conciliação em dia, o cliente sabe o saldo real desta semana, não só o do mês passado.'),
-  dict(k='Como começar', h='Comece pelo banco mais movimentado.', b='Concilie só ele todo dia por uma semana. Depois, inclua os outros.'),
-  dict(t='lista', bg=G, k='Resumo', h='Para fechar em 1 dia:', itens=['Conciliar todo dia', 'Pendências curtas', 'Começar pelo banco principal']),
-  cta('Mande para alguém', 'Mande para quem fecha o mês em vários dias.'),
-]
 SO = os.environ.get('SO')
 if SO: POSTS = {k: v for k, v in POSTS.items() if k == SO}
 
