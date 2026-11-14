@@ -56,7 +56,7 @@ def page(inner, t, i, n, extra_bg='', sim=None):
 
 def mk(t, style=None):
     # style of highlight box
-    if style=='dark': return f'background:{K};color:{G}'
+    if style=='dark': return f'background:{OFF};color:{K}'
     return f'background:{G};color:{K}'
 
 def build(s, i, n):
@@ -77,7 +77,7 @@ def build(s, i, n):
         return page(inner, t, i, n)
     if typ=='cover_split':
         bg = (f'<div style="position:absolute;left:0;top:0;width:1080px;height:660px;background:url(data:image/png;base64,{FOTO[s["foto"]]}) right center/cover"></div>')
-        title = s['title'].replace('<mark>', "<mark style='background:#111;color:#A1D141'>")
+        title = s['title'].replace('<mark>', "<mark style='background:#F6F6F2;color:#111'>")
         inner = (f'<div style="position:absolute;left:90px;right:90px;top:720px;bottom:190px;display:flex;flex-direction:column;justify-content:center">'
                  f'<div class="kick" style="color:{K};margin-bottom:26px">{s["kick"]}</div>'
                  f'<h1 style="font-size:92px;line-height:1.16">{title}</h1><p class="sub" style="margin-top:28px">{s["sub"]}</p></div>')
