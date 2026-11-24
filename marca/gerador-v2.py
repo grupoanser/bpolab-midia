@@ -75,56 +75,57 @@ def cta(k, h, extra='@bpo.lab'):
 
 BI = 'banco-de-imagens/'
 POSTS = {
- # 23/11 (seg)
- 'post-34-favorzinho-fora-do-contrato': [
-  dict(t='capa', bg=K, k='Gestão de clientes', h='O cliente pediu "só um [favorzinho"] fora do contrato?', sub='Leia antes de aceitar.', size=96),
-  dict(k='Cena hipotética', h='Começa com um pedido avulso.', b='"Liga para esse fornecedor e negocia o prazo?" Uma vez vira duas. Em três meses, já faz parte da rotina, sem estar no preço.'),
-  dict(bg=K, k='O problema', h='O que você faz sem combinar vira obrigação.', b='Depois fica difícil cobrar por algo que você já fazia sem custo.'),
-  dict(t='num', n='01', k='Escopo', h='Liste o que entra.', b='Tarefas, contas e prazos que fazem parte do serviço.'),
-  dict(t='num', n='02', k='Fora do escopo', h='Liste o que fica de fora.', b='E diga como funciona um pedido extra: orçamento à parte ou revisão do contrato.'),
-  dict(t='num', n='03', k='Revisão', h='Reveja o combinado de tempos em tempos.', b='Se o pedido avulso virou rotina, ele entra no escopo e no preço.'),
-  dict(bg=G, k='Contrato', h='Para o texto do contrato, consulte um profissional.', b='O escopo você conhece melhor que ninguém. A redação fica com quem é da área.'),
-  cta('Comente', 'Já passou por isso?'),
+ # 30/11 (seg)
+ 'post-39-era-so-isso': [
+  dict(t='capa', bg=W, k='Carreira', h='Lançava, conciliava, pagava... e o cliente achava que [era só isso]', sub='Cena hipotética.', size=84),
+  dict(k='Cena hipotética', h='A rotina que o cliente vê.', b='Lançar contas, conciliar o banco, agendar o que ele aprovou. Tudo em dia, e ele ainda acha que o serviço é "digitar".'),
+  dict(k='O que ele não vê', h='Conferência e relatório.', b='Saldo batido com o extrato, categoria revisada, relatório que fecha.'),
+  dict(k='Comunicação', h='Avisar antes de o problema chegar.', b='Conta que vence sem saldo, recebimento atrasado, comprovante que falta.'),
+  dict(bg=K, k='O salto', h='Explicar o que os números dizem.', b='Quando você mostra o resultado, o cliente para de enxergar só o lançamento.'),
+  dict(bg=G, k='Resumo', h='Lançar é a base. A&nbsp;análise é o que o cliente lembra.'),
+  cta('No grupo', 'Quer trocar ideia sobre isso? O grupo está no link da bio.'),
  ],
- # 24/11 (ter)
- 'post-35-comecou-com-um-cliente': [
-  dict(t='capa', bg=W, k='Começar no BPO', h='Começamos em 2020 com [um cliente só]', sub='Para começar, você não precisa de carteira.', size=100),
-  dict(k='O mito', h='"Só vou começar quando tiver vários clientes."', b='Esperar a carteira pronta adia o primeiro passo.'),
-  dict(k='O primeiro cliente', h='É ele que ensina a rotina na prática.', b='Prazo real, documento que atrasa, dúvida que você não tinha previsto.'),
-  dict(bg=K, k='Capacidade', h='Não aceite mais do que consegue entregar.', b='Um cliente bem atendido pesa mais do que vários atendidos pela metade.'),
-  dict(k='Indicação', h='Boa entrega costuma abrir a conversa com o próximo.', b='Quem gostou do serviço comenta com outro empresário.'),
-  dict(bg=G, k='Resumo', h='Para começar, um cliente basta.', b='O resto vem com entrega e paciência.'),
-  cta('Comente', 'Foi assim com você?'),
+ # 01/12 (ter)
+ 'post-40-voce-trabalha-com-bpo-quando': [
+  dict(t='capa', foto=BI+'pessoas-trabalhando/foto-01-analista-notebook-perfil.png', k='Identificação', h='Você trabalha&nbsp;com BPO [quando...]', sub='Complete a frase nos comentários.', size=92),
+  dict(k='Você trabalha com BPO quando', h='...abre o extrato antes do café.', cls='grande'),
+  dict(bg=K, k='Você trabalha com BPO quando', h='...sabe de cabeça qual cliente paga em qual dia.', cls='grande'),
+  dict(k='Você trabalha com BPO quando', h='...já explicou o que é BPO três vezes na mesma festa.', cls='grande'),
+  dict(bg=K, k='Você trabalha com BPO quando', h='...sente que falta um lançamento antes de saber qual.', cls='grande'),
+  dict(bg=G, k='Você trabalha com BPO quando', h='...comemora a conciliação que fecha de primeira.', cls='grande'),
+  cta('Mande para alguém', 'Mande para o colega que vai se reconhecer.'),
  ],
- # 25/11 (qua)
- 'post-36-3-numeros-relatorio': [
-  dict(t='capa', bg=G, k='Análise de resultado', h='O cliente não entende seu relatório? Comece por estes [3 números]', size=88),
-  dict(foto=BI+'documentos-e-relatorios/foto-02-maos-relatorios-pasta-verde.png', k='Antes da tabela', h='Três números, uma frase para cada.', b='O resto do relatório fica de apoio.'),
-  dict(t='num', n='01', k='Margem', h='Quanto sobra do que a empresa vende.', b='Frase para o cliente: "depois dos custos, isto é o que fica com a empresa".'),
-  dict(t='num', n='02', k='Caixa projetado', h='Quanto vai ter na conta nas próximas semanas.', b='Frase para o cliente: "se nada mudar, este é o saldo no dia tal".'),
-  dict(t='num', n='03', k='Inadimplência', h='Quanto está atrasado para receber.', b='Frase para o cliente: "isto já devia ter entrado e ainda não entrou".'),
-  dict(t='lista', bg=K, k='Resumo', h='Comece por:', itens=['Margem', 'Caixa projetado', 'Inadimplência']),
-  cta('Comente', 'Quais números você mostra ao seu cliente?'),
+ # 02/12 (qua)
+ 'post-41-vou-pensar': [
+  dict(t='capa', foto=BI+'reuniao-com-cliente/foto-11-consultor-relatorio-cliente.png', k='Gestão de clientes', h='O cliente disse "vou&nbsp;pensar"? Responda com [esta pergunta]', size=84),
+  dict(k='Cena hipotética', h='A reunião foi boa. A&nbsp;resposta, nem tanto.', b='Você apresentou o serviço, o cliente gostou e, no fim, veio o "vou pensar".'),
+  dict(bg=K, k='Por que acontece', h='Ele compara com o que já conhece.', b='Se a referência dele é "alguém que lança as contas", qualquer preço parece alto.'),
+  dict(t='num', n='01', k='Escopo antes do preço', h='Mostre o que está incluído.', b='Tarefa por tarefa, antes de falar em valor.'),
+  dict(t='num', n='02', k='O que ele deixa de fazer', h='Mostre o tempo que volta para ele.', b='Conferir extrato, cobrar comprovante, montar planilha no domingo.'),
+  dict(t='num', n='03', k='Próximo passo', h='Combine o que acontece depois.', b='Uma data para a resposta, ou uma dúvida para tirar antes dela.'),
+  dict(bg=G, k='A pergunta', h='"O que falta para você decidir?"', b='A resposta mostra se a dúvida é preço, escopo ou momento.'),
+  cta('Mande para alguém', 'Mande para quem ouviu "vou pensar" esta semana.'),
  ],
- # 26/11 (qui)
- 'post-37-3-prompts-dados-simulados': [
-  dict(t='capa', bg=K, k='IA e ferramentas', h='3 [prompts] para a rotina do BPO', sub='Com dados simulados. Salve para testar.', size=104),
-  dict(k='Antes de tudo', h='Use dados simulados.', b='Troque nome de cliente, CNPJ e valores reais por dados fictícios antes de colar em qualquer ferramenta.'),
-  dict(t='num', n='01', k='Classificar lançamentos', h='"Sugira uma categoria para cada lançamento abaixo e avise quando estiver em dúvida."', b='Cole a lista simulada e o seu plano de contas.', size=60),
-  dict(t='num', n='02', k='Resumir variações', h='"Compare os dois meses abaixo e liste as maiores variações por categoria."', b='Você confere e escreve a explicação.', size=60),
-  dict(t='num', n='03', k='Mensagem ao cliente', h='"Escreva uma mensagem curta e educada pedindo os comprovantes desta lista."', b='Ajuste o tom antes de enviar.', size=60),
-  dict(bg=G, k='Sempre', h='Revise antes de usar.', b='A IA entrega um rascunho. Quem responde pelo resultado é você.'),
-  cta('Salve', 'Salve para testar na sua rotina.'),
+ # 03/12 (qui)
+ 'post-42-conferir-relatorio': [
+  dict(t='capa', bg=G, k='Rotina e processo', h='Antes de clicar em "enviar" no relatório, confira estas [4 coisas]', size=90),
+  dict(t='num', n='01', k='Saldos', h='Os saldos batem com o extrato?', b='Conta por conta, no último dia do período.'),
+  dict(t='num', n='02', k='Classificação', h='Os lançamentos estão na categoria certa?', b='Olhe primeiro os valores maiores e o que caiu em "outros".'),
+  dict(t='num', n='03', k='Comparativo', h='O que mudou em relação ao mês anterior?', b='Coloque os dois meses lado a lado.'),
+  dict(t='num', n='04', k='Variações', h='Cada variação grande tem explicação?', b='Se você não sabe explicar, o cliente vai perguntar.'),
+  dict(foto=BI+'documentos-e-relatorios/foto-08-analista-grafico-impresso.png', k='Se der', h='Peça um segundo olhar.', b='Outra pessoa acha em minutos o que você já não enxerga.'),
+  dict(t='lista', bg=K, k='Resumo', h='Antes de enviar:', itens=['Saldos', 'Classificação', 'Comparativo', 'Variações']),
+  cta('Salve', 'Salve para conferir no próximo fechamento.'),
  ],
- # 27/11 (sex)
- 'post-38-crescer-sem-virar-dono': [
-  dict(t='capa', bg=W, k='Carreira', h='Dá para crescer no BPO [sem virar dono]?', sub='Quatro caminhos possíveis. Nenhum é promessa.', size=100),
-  dict(t='num', n='01', k='Especializar-se', h='Ficar muito bom em um tipo de cliente ou de tarefa.', b='Análise, conciliação de alto volume ou um setor específico.'),
-  dict(t='num', n='02', k='Liderar equipe', h='Coordenar analistas e revisar o trabalho.', b='Menos operação, mais conferência e gestão de pessoas.'),
-  dict(t='num', n='03', k='Por conta própria', h='Atender seus clientes como autônomo.', b='Mais liberdade e mais responsabilidade pela venda e pela entrega.'),
-  dict(t='num', n='04', k='Consultoria', h='Ajudar empresas a organizar o financeiro.', b='Projetos com começo e fim, em vez de rotina mensal.'),
-  dict(foto=BI+'pessoas-trabalhando/foto-04-analista-notebook-blazer.png', k='Cada caminho tem custo', h='Tempo, estudo ou risco.', b='Escolha pelo tipo de trabalho que você gosta de fazer.'),
-  cta('Comente', 'Onde você quer chegar?'),
+ # 04/12 (sex)
+ 'post-43-ferramentas': [
+  dict(t='capa', bg=G, k='Comunidade', h='Qual [ferramenta] você usa no BPO?', sub='Vamos comparar nos comentários.', size=104),
+  dict(k='Sistema financeiro', h='Onde ficam contas a pagar, a receber e o fluxo de caixa?'),
+  dict(k='Planilha', h='Ainda faz parte da sua rotina?', b='Para controles paralelos, conferências ou relatórios.'),
+  dict(bg=K, k='Conciliação', h='Como você bate o banco com os lançamentos?', b='Pelo próprio sistema, por planilha ou à mão.'),
+  dict(k='IA', h='Entra em alguma parte do seu dia?', b='Classificação, resumo de extrato, rascunho de <span style="white-space:nowrap">e-mail</span>.'),
+  dict(t='lista', bg=K, k='Na hora de escolher', h='Olhe para:', itens=['Integração com bancos', 'Custo por cliente', 'Tempo para aprender']),
+  cta('Comente', 'Conte qual ferramenta você usa e por quê.'),
  ],
 }
 
